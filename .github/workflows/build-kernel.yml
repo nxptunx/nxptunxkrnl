@@ -1,0 +1,110 @@
+name: Build lime USB Wi-Fi kernel
+
+on:
+  workflow_dispatch:
+    inputs:
+      kernel_ref:
+        description: Halcyon kernel branch/ref
+        required: true
+        default: bloom
+        type: string
+      defconfig:
+        description: Base defconfig
+        required: true
+        default: vendor/bengal_defconfig
+        type: choice
+        options:
+          - vendor/bengal_defconfig
+          - vendor/bengal-perf_defconfig
+      build_rtw88:
+        description: Build external Realtek RTW88 modules
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lime-kernel-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    env:
+      DEVICE: lime
+      KERNEL_REF: ${{ github.event.inputs.kernel_ref || 'bloom' }}
+      DEFCONFIG: ${{ github.event.inputs.defconfig || 'vendor/bengal_defconfig' }}
+      BUILD_RTW88: ${{ github.event.inputs.build_rtw88 || 'true' }}
+      CLANG_TAG: '20250912'
+      JOBS: '2'
+    steps:
+      - name: Checkout build scripts
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential bc curl ca-certificates zip unzip \
+            kmod cpio gzip xz-utils file \
+            libncurses-dev libssl-dev libelf-dev zlib1g-dev \
+            flex bison
+
+      - name: Checkout Halcyon kernel
+        uses: actions/checkout@v4
+        with:
+          repository: liliumproject/kernel_xiaomi_chime
+          ref: ${{ env.KERNEL_REF }}
+          path: kernel
+          fetch-depth: 1
+
+      - name: Checkout AnyKernel3
+        uses: actions/checkout@v4
+        with:
+          repository: osm0sis/AnyKernel3
+          ref: master
+          path: AK3
+          fetch-depth: 1
+
+      - name: Clone external RTW88 driver suite
+        run: |
+          mkdir -p external
+          git clone --depth=1 \
+            https://github.com/ShorterKing/RTW88-Android-Drivers.git \
+            external/rtw88-android
+
+      - name: Download Lilium clang
+        run: bash scripts/download_toolchain.sh
+
+      - name: Build kernel and modules
+        run: bash scripts/build.sh
+
+      - name: Fetch firmware
+        run: bash scripts/fetch-firmware.sh
+
+      - name: Package AnyKernel3 and modules zips
+        run: bash scripts/package_anykernel.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lime-kernel-${{ github.sha }}
+          path: artifacts/*
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*

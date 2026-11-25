@@ -1,0 +1,5 @@
+# Optional automatic loading of bundled USB Wi-Fi modules.
+# Requires the AK3/Magisk/KernelSU helper to have installed /vendor/bin.
+
+on property:sys.boot_completed=1
+    exec_background u:r:shell:s0 /system/bin/sh /vendor/bin/load-usb-wifi.sh

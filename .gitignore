@@ -1,0 +1,15 @@
+# Build checkouts and outputs (all under this workspace)
+/kernel/
+/AK3/
+/external/
+/toolchain/
+/out/
+/firmware/
+/staging/
+/artifacts/
+/module-package/
+
+.kernelrelease
+.rtw88-status
+*.zip
+*.tar.gz

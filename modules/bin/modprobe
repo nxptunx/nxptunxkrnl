@@ -1,0 +1,37 @@
+#!/system/bin/sh
+# Minimal modprobe for Android: reads modules.dep and insmods dependencies first.
+# Installed to /vendor/lib/modules/modprobe and /vendor/bin/modprobe.
+
+MODDIR=/vendor/lib/modules
+DEPFILE="$MODDIR/modules.dep"
+
+if [ "${1:-}" = "-r" ] || [ "${1:-}" = "--remove" ]; then
+  shift
+  exec rmmod "${1%.ko}"
+fi
+
+[ $# -ge 1 ] || { echo "usage: modprobe MODULE [insmod args...]" >&2; exit 1; }
+
+want="${1##*/}"
+want="${want%.ko}"
+shift
+extra="$*"
+
+file="$want.ko"
+if [ -f "$DEPFILE" ]; then
+  line=$(grep -m1 -E "(^|/)${want}\\.ko:" "$DEPFILE" 2>/dev/null)
+  if [ -n "$line" ]; then
+    file="${line%%:*}"
+    deps="${line#*:}"
+    for dep in $deps; do
+      case "$dep" in
+        *.ko) insmod "$MODDIR/$dep" >/dev/null 2>&1 ;;
+      esac
+    done
+  fi
+fi
+
+[ -f "$MODDIR/$file" ] || { echo "modprobe: module $want not found in $MODDIR" >&2; exit 1; }
+
+# shellcheck disable=SC2086
+insmod "$MODDIR/$file" $extra
