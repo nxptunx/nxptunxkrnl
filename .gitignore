@@ -8,6 +8,7 @@
 /staging/
 /artifacts/
 /module-package/
+/actions-artifacts/
 
 .kernelrelease
 .rtw88-status

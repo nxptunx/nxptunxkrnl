@@ -28,7 +28,7 @@ Everything is fetched and staged **inside this workspace**:
 - `rtl8xxxu` — RTL8188CU/RTL8192CU/RTL8723AU family
 - `rtl8192cu` — rtlwifi variant of RTL8192CU
 - `mt7601u`
-- `mt76x0u` — MT7610U USB
+- `mt76x0` — MT7610U USB (`mt76` + `mt76-usb` are loaded as dependencies)
 - `mt76x2u` — MT7612U / MT7662U USB
 
 ### External RTW88 suite
@@ -165,7 +165,7 @@ Look for lines such as `Vendor=0bda ProdID=8812` or text like
 | `0bda:8812`, `0bda:881a`, `0bda:881b`, `0bda:881c` | RTL8812AU | `rtw_8812au` |
 | `0bda:8811` family | RTL8811AU | `rtw_8812au` |
 | `0bda:0821`, `0bda:a811` family | RTL8821AU | `rtw_8821au` |
-| `0e8d:7610` / `0e8d:7612` family | MT7610U / MT7612U | `mt76x0u` / `mt76x2u` |
+| `0e8d:7610` / `0e8d:7612` family | MT7610U / MT7612U | `mt76x0` / `mt76x2u` |
 | `148f:7601` | MT7601U | `mt7601u` |
 | `0bda:8176`, `0bda:8192` family | RTL8188/8192 USB | `rtl8xxxu` / `rtl8192cu` |
 

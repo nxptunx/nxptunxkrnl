@@ -7,11 +7,11 @@ MODPROBE=/vendor/bin/modprobe
 [ -x "$MODPROBE" ] || MODPROBE="$MODDIR/modprobe"
 
 mods="
-mt76_core
-mt76_usb
-mt76x2_common
+mt76
+mt76-usb
+mt76x2-common
 mt7601u
-mt76x0u
+mt76x0
 mt76x2u
 rtl8xxxu
 rtw_core
