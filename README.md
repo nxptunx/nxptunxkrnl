@@ -141,12 +141,15 @@ Firmware locations:
 
 ```text
 /vendor/firmware/mt7601u.bin
-/vendor/firmware/mt7610u.bin
-/vendor/firmware/mt7662u.bin
-/vendor/firmware/mt7662u_rom_patch.bin
+/vendor/firmware/mediatek/mt7610u.bin
+/vendor/firmware/mediatek/mt7662u.bin
+/vendor/firmware/mediatek/mt7662u_rom_patch.bin
 /vendor/firmware/rtlwifi/*.bin
 /vendor/firmware/rtw88/*.bin
 ```
+
+`mt7601u` is the exception: its driver requests the firmware from the root,
+while `mt76x0`/`mt76x2u` request files from the `mediatek/` subdirectory.
 
 ## Identify your USB Wi-Fi adapter
 

@@ -38,6 +38,7 @@ copy_ko "$OUT_DIR"
 copy_ko "$RTW88_DIR"
 
 [ -f "$OUT_DIR/modules.builtin" ] && cp "$OUT_DIR/modules.builtin" "$MODROOT/modules.builtin"
+[ -f "$OUT_DIR/modules.order" ] && cp "$OUT_DIR/modules.order" "$MODROOT/modules.order"
 [ -f "$OUT_DIR/Module.symvers" ] && cp "$OUT_DIR/Module.symvers" "$MODROOT/Module.symvers"
 
 if ! (cd "$STAGING_DIR" && depmod -b . "$KVER"); then
