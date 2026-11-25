@@ -1,4 +1,4 @@
-name: Build lime USB Wi-Fi kernel
+name: Build nxptunxkrnl
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: lime-kernel-${{ github.ref }}
+  group: nxptunxkrnl-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -98,7 +98,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: lime-kernel-${{ github.sha }}
+          name: nxptunxkrnl-${{ github.sha }}
           path: artifacts/*
           if-no-files-found: error
           retention-days: 30

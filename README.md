@@ -1,6 +1,6 @@
-# Lime USB Wi-Fi kernel build
+# nxptunxkrnl
 
-Builds a Halcyon OS 16.2 / Android 16 kernel for the Redmi 9T (`lime`, SM6115 / SD 662)
+Branded build of a Halcyon OS 16.2 / Android 16 kernel for the Redmi 9T (`lime`, SM6115 / SD 662)
 with:
 
 - loadable `.ko` modules (`insmod` / `modprobe`-style),
@@ -50,7 +50,7 @@ compatible driver source under `external/`.
 
 1. Put these files in a GitHub repository.
 2. Enable Actions.
-3. Run the workflow manually (`Actions → Build lime USB Wi-Fi kernel → Run workflow`)
+3. Run the workflow manually (`Actions → Build nxptunxkrnl → Run workflow`)
    or push to `main`/`master`.
 
 Inputs:
@@ -61,8 +61,8 @@ Inputs:
 
 Artifacts:
 
-- `AnyKernel3-lime-<version>-<date>.zip` — kernel + modules + firmware
-- `modules-lime-<version>-<date>.zip` — modules/firmware only, for manual install
+- `AnyKernel3-nxptunxkrnl-<version>-<date>.zip` — kernel + modules + firmware
+- `modules-nxptunxkrnl-<version>-<date>.zip` — modules/firmware only, for manual install
 - `build-report.txt`
 
 Tagged releases also publish the artifacts to a GitHub Release.
@@ -106,7 +106,7 @@ Halcyon's `lime` device page lists firmware `14.0.5.0.SJQMIXM` as the required b
 Update to that firmware first if you are on an older build.
 
 1. Boot into recovery.
-2. Flash `AnyKernel3-lime-*.zip`.
+2. Flash `AnyKernel3-nxptunxkrnl-*.zip`.
 3. Reboot.
 
 The zip uses `do.modules=1` and `do.systemless=1`, so modules/firmware/scripts are
@@ -186,3 +186,8 @@ Vendor-specific IDs vary. If your ID is not in the table, search the driver sour
 - If the RTW88 out-of-tree build fails in Actions, the kernel and in-tree modules are
   still packaged; check `build-report.txt` and the workflow log.
 - Flash only on `lime`. `device.name1=lime` is enforced by the AnyKernel3 script.
+
+## License
+
+GPL-2.0-only. See [LICENSE](LICENSE). The upstream kernel and bundled drivers keep their
+own licenses.

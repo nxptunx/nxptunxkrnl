@@ -6,8 +6,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 [ -f "$WORKSPACE/.kernelrelease" ] || { echo "Run scripts/build.sh first" >&2; exit 1; }
 KVER="$(cat "$WORKSPACE/.kernelrelease")"
 DATE="$(date +%Y%m%d-%H%M)"
-AK_ZIP="$ARTIFACTS_DIR/AnyKernel3-lime-${KVER}-${DATE}.zip"
-MOD_ZIP="$ARTIFACTS_DIR/modules-lime-${KVER}-${DATE}.zip"
+AK_ZIP="$ARTIFACTS_DIR/AnyKernel3-nxptunxkrnl-${KVER}-${DATE}.zip"
+MOD_ZIP="$ARTIFACTS_DIR/modules-nxptunxkrnl-${KVER}-${DATE}.zip"
 
 mkdir -p "$ARTIFACTS_DIR"
 [ -d "$AK_DIR" ] || { echo "AnyKernel3 checkout missing at $AK_DIR" >&2; exit 1; }
@@ -17,7 +17,7 @@ rm -rf "$AK_DIR/.git" "$AK_DIR/README.md" "$AK_DIR/anykernel.sh" \
   "$AK_DIR/ramdisk" "$AK_DIR/patch" "$AK_DIR/split_img" "$AK_DIR/modules"
 
 cp "$WORKSPACE/anykernel/anykernel.sh" "$AK_DIR/anykernel.sh"
-sed -i "s|__KERNEL_STRING__|Lime USB-WiFi ${KVER} ${DATE}|g" "$AK_DIR/anykernel.sh"
+sed -i "s|__KERNEL_STRING__|nxptunxkrnl ${KVER} ${DATE}|g" "$AK_DIR/anykernel.sh"
 
 cp "$OUT_DIR/arch/arm64/boot/Image.gz" "$AK_DIR/Image.gz"
 

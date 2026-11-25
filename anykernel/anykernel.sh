@@ -23,7 +23,7 @@ PATCH_VBMETA_FLAG=auto;
 . tools/ak3-core.sh;
 
 ui_print " ";
-ui_print "Installing Lime USB Wi-Fi kernel";
+ui_print "Installing nxptunxkrnl";
 
 dump_boot;
 write_boot;
