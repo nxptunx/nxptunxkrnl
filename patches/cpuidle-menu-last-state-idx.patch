@@ -1,0 +1,16 @@
+diff --git a/drivers/cpuidle/governors/menu.c b/drivers/cpuidle/governors/menu.c
+index baeb36cc2..f28707f49 100644
+--- a/drivers/cpuidle/governors/menu.c
++++ b/drivers/cpuidle/governors/menu.c
+@@ -457,9 +457,9 @@ static int menu_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
+ 	}
+ 
+ out:
+-	data->last_state_idx = idx;
++	dev->last_state_idx = idx;
+ 
+-	return data->last_state_idx;
++	return dev->last_state_idx;
+ }
+ 
+ /**

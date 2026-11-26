@@ -20,6 +20,16 @@ echo "=== Applying nxptunx kernel branding ==="
 printf '%s\n' '-cip132' > "$KERNEL_DIR/localversion-cip"
 printf '%s\n' '-st16' > "$KERNEL_DIR/localversion-st"
 
+CPUIDLE_PATCH="$WORKSPACE/patches/cpuidle-menu-last-state-idx.patch"
+if [ -f "$CPUIDLE_PATCH" ]; then
+  echo "=== Applying cpuidle menu governor fix ==="
+  if git -C "$KERNEL_DIR" apply --check "$CPUIDLE_PATCH" 2>/dev/null; then
+    git -C "$KERNEL_DIR" apply "$CPUIDLE_PATCH"
+  else
+    echo "cpuidle patch already applied or not needed; continuing"
+  fi
+fi
+
 BASE_CONFIG="${BASE_CONFIG:-$WORKSPACE/config/lime-stock.config}"
 
 if [ -f "$BASE_CONFIG" ]; then
