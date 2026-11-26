@@ -6,7 +6,7 @@ on:
       kernel_ref:
         description: Halcyon kernel branch/ref
         required: true
-        default: bloom
+        default: staging/16.2
         type: string
       defconfig:
         description: Base defconfig
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       DEVICE: lime
-      KERNEL_REF: ${{ github.event.inputs.kernel_ref || 'bloom' }}
+      KERNEL_REF: ${{ github.event.inputs.kernel_ref || 'staging/16.2' }}
       DEFCONFIG: ${{ github.event.inputs.defconfig || 'vendor/bengal_defconfig' }}
       BUILD_RTW88: ${{ github.event.inputs.build_rtw88 || 'true' }}
       CLANG_TAG: '20250912'

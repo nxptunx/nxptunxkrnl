@@ -55,7 +55,7 @@ compatible driver source under `external/`.
 
 Inputs:
 
-- `kernel_ref`: kernel branch, default `bloom`
+- `kernel_ref`: kernel branch, default `staging/16.2` (matches Halcyon OS 16.2)
 - `defconfig`: `vendor/bengal_defconfig` or `vendor/bengal-perf_defconfig`
 - `build_rtw88`: build external Realtek modules, default `true`
 
@@ -73,7 +73,7 @@ From this directory:
 
 ```bash
 mkdir -p kernel AK3 external
-git clone --depth=1 -b bloom \
+git clone --depth=1 -b staging/16.2 \
   https://github.com/liliumproject/kernel_xiaomi_chime.git kernel
 git clone --depth=1 https://github.com/osm0sis/AnyKernel3.git AK3
 git clone --depth=1 \
