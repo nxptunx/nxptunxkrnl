@@ -105,7 +105,11 @@ Important config choices:
 Halcyon's `lime` device page lists firmware `14.0.5.0.SJQMIXM` as the required base.
 Update to that firmware first if you are on an older build.
 
-1. Boot into recovery.
+`lime` is handled as a non-A/B device here, so the AnyKernel3 script uses
+`IS_SLOT_DEVICE=0`. The flashable file is the **inner** `AnyKernel3-*.zip`;
+GitHub Actions artifacts are wrapper zips that also contain modules and a report.
+
+1. Boot into recovery, or open Kernel Flasher and select the inner `AnyKernel3-*.zip`.
 2. Flash `AnyKernel3-nxptunxkrnl-*.zip`.
 3. Reboot.
 

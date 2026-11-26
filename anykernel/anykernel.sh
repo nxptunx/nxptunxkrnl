@@ -16,7 +16,7 @@ supported.vendorpatchlevels=
 '; } # end properties
 
 BLOCK=boot;
-IS_SLOT_DEVICE=1;
+IS_SLOT_DEVICE=0;
 RAMDISK_COMPRESSION=auto;
 PATCH_VBMETA_FLAG=auto;
 
