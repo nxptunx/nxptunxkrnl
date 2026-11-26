@@ -13,7 +13,7 @@ Everything is fetched and staged **inside this workspace**:
 
 | Path | Contents |
 | --- | --- |
-| `kernel/` | Halcyon `liliumproject/kernel_xiaomi_chime` source |
+| `kernel/` | Valeryn `jomadeto/valeryn_xiaomi_sm6115` source used by the Halcyon lime ROM |
 | `AK3/` | AnyKernel3 checkout used for the flashable zip |
 | `external/rtw88-android/` | External Realtek RTW88 driver suite |
 | `toolchain/` | Lilium clang toolchain |
@@ -55,7 +55,7 @@ compatible driver source under `external/`.
 
 Inputs:
 
-- `kernel_ref`: kernel branch, default `staging/16.2` (matches Halcyon OS 16.2)
+- `kernel_ref`: kernel branch, default `16.0` (Valeryn tree used by Halcyon OS 16.2)
 - `defconfig`: default `vendor/bengal-perf_defconfig` (matches the stock `-lilium` build); `vendor/bengal_defconfig` is also available
 - `build_rtw88`: build external Realtek modules, default `true`
 
@@ -73,8 +73,8 @@ From this directory:
 
 ```bash
 mkdir -p kernel AK3 external
-git clone --depth=1 -b staging/16.2 \
-  https://github.com/liliumproject/kernel_xiaomi_chime.git kernel
+git clone --depth=1 -b 16.0 \
+  https://github.com/jomadeto/valeryn_xiaomi_sm6115.git kernel
 git clone --depth=1 https://github.com/osm0sis/AnyKernel3.git AK3
 git clone --depth=1 \
   https://github.com/ShorterKing/RTW88-Android-Drivers.git \

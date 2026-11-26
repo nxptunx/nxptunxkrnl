@@ -13,6 +13,13 @@ esac
 [ -d "$KERNEL_DIR" ] || { echo "Kernel source missing at $KERNEL_DIR" >&2; exit 1; }
 mkdir -p "$OUT_DIR" "$ARTIFACTS_DIR"
 
+# Match the stock Halcyon kernel release suffix. The Valeryn public tree uses
+# -valeryn/-cip127/-st11, while the ROM reports -cip132-st16-lilium.
+echo "=== Matching stock kernel release suffix ==="
+: > "$KERNEL_DIR/localversion"
+printf '%s\n' '-cip132' > "$KERNEL_DIR/localversion-cip"
+printf '%s\n' '-st16' > "$KERNEL_DIR/localversion-st"
+
 BASE_CONFIG="${BASE_CONFIG:-$WORKSPACE/config/lime-stock.config}"
 
 if [ -f "$BASE_CONFIG" ]; then
@@ -66,7 +73,7 @@ echo "$RTW_STATUS" > "$WORKSPACE/.rtw88-status"
   echo "Device: $DEVICE"
   echo "Kernel release: $KVER"
   echo "Base config: ${BASE_CONFIG:-$DEFCONFIG}"
-  echo "Kernel ref: ${KERNEL_REF:-staging/16.2}"
+  echo "Kernel ref: ${KERNEL_REF:-16.0}"
   echo "RTW88 module build: $RTW_STATUS"
   echo "In-tree + external .ko count: $(find "$OUT_DIR" "$RTW88_DIR" -type f -name '*.ko' 2>/dev/null | wc -l)"
 } > "$ARTIFACTS_DIR/build-report.txt"

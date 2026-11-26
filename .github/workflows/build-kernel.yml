@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       kernel_ref:
-        description: Halcyon kernel branch/ref
+        description: Valeryn kernel branch/ref
         required: true
-        default: staging/16.2
+        default: '16.0'
         type: string
       defconfig:
         description: Base defconfig
@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       DEVICE: lime
-      KERNEL_REF: ${{ github.event.inputs.kernel_ref || 'staging/16.2' }}
+      KERNEL_REF: ${{ github.event.inputs.kernel_ref || '16.0' }}
       DEFCONFIG: ${{ github.event.inputs.defconfig || 'vendor/bengal-perf_defconfig' }}
       BUILD_RTW88: ${{ github.event.inputs.build_rtw88 || 'true' }}
       CLANG_TAG: '20250912'
@@ -63,7 +63,7 @@ jobs:
       - name: Checkout Halcyon kernel
         uses: actions/checkout@v4
         with:
-          repository: liliumproject/kernel_xiaomi_chime
+          repository: jomadeto/valeryn_xiaomi_sm6115
           ref: ${{ env.KERNEL_REF }}
           path: kernel
           fetch-depth: 1
