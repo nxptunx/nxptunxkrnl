@@ -56,7 +56,7 @@ compatible driver source under `external/`.
 Inputs:
 
 - `kernel_ref`: kernel branch, default `16.0` (Valeryn tree used by Halcyon OS 16.2)
-- `defconfig`: `vendor/bengal-perf_defconfig` is the fallback; the build uses `config/lime-stock.config` by default and brands the release as `-nxptunx`
+- `defconfig`: `vendor/bengal-perf_defconfig` from the Valeryn tree by default; `config/lime-stock.config` is kept only for comparison/diagnostics and is no longer used as the build base. The release is branded as `-nxptunx`.
 - `build_rtw88`: build external Realtek modules, default `true`
 
 Artifacts:
@@ -88,13 +88,14 @@ bash scripts/package_anykernel.sh
 
 The build script applies:
 
-1. `config/lime-stock.config` — the exact config dumped from the running stock kernel
+1. `vendor/bengal-perf_defconfig` from the Valeryn tree (native to this kernel source)
 2. `kernel/arch/arm64/configs/vendor/xiaomi/lime.config`
 3. `config/usb-wifi-modules.config`
 
-Using the stock config is important: the ROM's `lime` touchscreen setup uses
-`TOUCHSCREEN_FT8719`, `TOUCHSCREEN_NT36672A` and `TOUCHSCREEN_XIAOMI_TOUCHFEATURE`,
-which the generic Bengal defconfig does not enable.
+The Valeryn `bengal-perf_defconfig` already enables the correct `lime` touchscreen
+setup: `TOUCHSCREEN_FT8719`, `TOUCHSCREEN_NT36672A` and
+`TOUCHSCREEN_XIAOMI_TOUCHFEATURE`. The phone's dumped config is from a newer ROM
+build and should not be used as the build base for this public source tree.
 
 Important config choices:
 

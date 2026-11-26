@@ -30,10 +30,10 @@ if [ -f "$CPUIDLE_PATCH" ]; then
   fi
 fi
 
-BASE_CONFIG="${BASE_CONFIG:-$WORKSPACE/config/lime-stock.config}"
+BASE_CONFIG="${BASE_CONFIG:-}"
 
-if [ -f "$BASE_CONFIG" ]; then
-  echo "=== Configuring $DEVICE from stock kernel config ==="
+if [ -n "$BASE_CONFIG" ] && [ -f "$BASE_CONFIG" ]; then
+  echo "=== Configuring $DEVICE from $BASE_CONFIG ==="
   cp -f "$BASE_CONFIG" "$OUT_DIR/.config"
 else
   echo "=== Configuring $DEVICE with $DEFCONFIG ==="
