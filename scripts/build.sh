@@ -3,7 +3,7 @@ set -euo pipefail
 
 source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 
-DEFCONFIG="${DEFCONFIG:-vendor/bengal_defconfig}"
+DEFCONFIG="${DEFCONFIG:-vendor/bengal-perf_defconfig}"
 BUILD_RTW88="${BUILD_RTW88:-1}"
 case "${BUILD_RTW88,,}" in
   1|true|yes|on) BUILD_RTW88=1 ;;

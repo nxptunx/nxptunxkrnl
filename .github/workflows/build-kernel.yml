@@ -11,7 +11,7 @@ on:
       defconfig:
         description: Base defconfig
         required: true
-        default: vendor/bengal_defconfig
+        default: vendor/bengal-perf_defconfig
         type: choice
         options:
           - vendor/bengal_defconfig
@@ -41,7 +41,7 @@ jobs:
     env:
       DEVICE: lime
       KERNEL_REF: ${{ github.event.inputs.kernel_ref || 'staging/16.2' }}
-      DEFCONFIG: ${{ github.event.inputs.defconfig || 'vendor/bengal_defconfig' }}
+      DEFCONFIG: ${{ github.event.inputs.defconfig || 'vendor/bengal-perf_defconfig' }}
       BUILD_RTW88: ${{ github.event.inputs.build_rtw88 || 'true' }}
       CLANG_TAG: '20250912'
       JOBS: '2'

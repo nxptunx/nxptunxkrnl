@@ -56,7 +56,7 @@ compatible driver source under `external/`.
 Inputs:
 
 - `kernel_ref`: kernel branch, default `staging/16.2` (matches Halcyon OS 16.2)
-- `defconfig`: `vendor/bengal_defconfig` or `vendor/bengal-perf_defconfig`
+- `defconfig`: default `vendor/bengal-perf_defconfig` (matches the stock `-lilium` build); `vendor/bengal_defconfig` is also available
 - `build_rtw88`: build external Realtek modules, default `true`
 
 Artifacts:
@@ -88,7 +88,7 @@ bash scripts/package_anykernel.sh
 
 The build script applies:
 
-1. `vendor/bengal_defconfig` (or the selected defconfig)
+1. `vendor/bengal-perf_defconfig` (or the selected defconfig)
 2. `kernel/arch/arm64/configs/vendor/xiaomi/lime.config`
 3. `config/usb-wifi-modules.config`
 
