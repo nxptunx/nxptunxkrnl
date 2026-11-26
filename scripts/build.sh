@@ -13,9 +13,9 @@ esac
 [ -d "$KERNEL_DIR" ] || { echo "Kernel source missing at $KERNEL_DIR" >&2; exit 1; }
 mkdir -p "$OUT_DIR" "$ARTIFACTS_DIR"
 
-# Match the stock Halcyon kernel release suffix. The Valeryn public tree uses
-# -valeryn/-cip127/-st11, while the ROM reports -cip132-st16-lilium.
-echo "=== Matching stock kernel release suffix ==="
+# Brand the release as ours while keeping the CIP/ST base version that matches
+# the ROM's 4.19.325-cip132-st16 lineage. Expected: 4.19.325-cip132-st16-nxptunx-g...
+echo "=== Applying nxptunx kernel branding ==="
 : > "$KERNEL_DIR/localversion"
 printf '%s\n' '-cip132' > "$KERNEL_DIR/localversion-cip"
 printf '%s\n' '-st16' > "$KERNEL_DIR/localversion-st"

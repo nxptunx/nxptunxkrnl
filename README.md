@@ -56,7 +56,7 @@ compatible driver source under `external/`.
 Inputs:
 
 - `kernel_ref`: kernel branch, default `16.0` (Valeryn tree used by Halcyon OS 16.2)
-- `defconfig`: default `vendor/bengal-perf_defconfig` (matches the stock `-lilium` build); `vendor/bengal_defconfig` is also available
+- `defconfig`: `vendor/bengal-perf_defconfig` is the fallback; the build uses `config/lime-stock.config` by default and brands the release as `-nxptunx`
 - `build_rtw88`: build external Realtek modules, default `true`
 
 Artifacts:
