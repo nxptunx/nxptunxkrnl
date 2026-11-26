@@ -13,8 +13,15 @@ esac
 [ -d "$KERNEL_DIR" ] || { echo "Kernel source missing at $KERNEL_DIR" >&2; exit 1; }
 mkdir -p "$OUT_DIR" "$ARTIFACTS_DIR"
 
-echo "=== Configuring $DEVICE with $DEFCONFIG ==="
-kmake "$DEFCONFIG"
+BASE_CONFIG="${BASE_CONFIG:-$WORKSPACE/config/lime-stock.config}"
+
+if [ -f "$BASE_CONFIG" ]; then
+  echo "=== Configuring $DEVICE from stock kernel config ==="
+  cp -f "$BASE_CONFIG" "$OUT_DIR/.config"
+else
+  echo "=== Configuring $DEVICE with $DEFCONFIG ==="
+  kmake "$DEFCONFIG"
+fi
 
 echo "=== Merging lime + USB Wi-Fi fragments ==="
 (
@@ -58,7 +65,7 @@ echo "$RTW_STATUS" > "$WORKSPACE/.rtw88-status"
 {
   echo "Device: $DEVICE"
   echo "Kernel release: $KVER"
-  echo "Base defconfig: $DEFCONFIG"
+  echo "Base config: ${BASE_CONFIG:-$DEFCONFIG}"
   echo "Kernel ref: ${KERNEL_REF:-staging/16.2}"
   echo "RTW88 module build: $RTW_STATUS"
   echo "In-tree + external .ko count: $(find "$OUT_DIR" "$RTW88_DIR" -type f -name '*.ko' 2>/dev/null | wc -l)"

@@ -88,9 +88,13 @@ bash scripts/package_anykernel.sh
 
 The build script applies:
 
-1. `vendor/bengal-perf_defconfig` (or the selected defconfig)
+1. `config/lime-stock.config` — the exact config dumped from the running stock kernel
 2. `kernel/arch/arm64/configs/vendor/xiaomi/lime.config`
 3. `config/usb-wifi-modules.config`
+
+Using the stock config is important: the ROM's `lime` touchscreen setup uses
+`TOUCHSCREEN_FT8719`, `TOUCHSCREEN_NT36672A` and `TOUCHSCREEN_XIAOMI_TOUCHFEATURE`,
+which the generic Bengal defconfig does not enable.
 
 Important config choices:
 
